@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Atrium — Full horizontal lockup
+  Mark + ATRIUM wordmark + "THE ATRIUM MISSION" subtitle
+  Colors: #E8920A (mark + wordmark) / #7A4A06 (subtitle)
+  Type: Manrope (700 / 500) — install Manrope or convert text to outlines in your design tool before final use.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" width="1080" height="280">
+  <defs>
+    <style type="text/css"><![CDATA[
+      .word { font-family: 'Manrope','Helvetica Neue',Arial,sans-serif; font-weight: 700; font-size: 62px; letter-spacing: 7px; fill: #E8920A; }
+      .sub  { font-family: 'Manrope','Helvetica Neue',Arial,sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 5px; fill: #7A4A06; }
+    ]]></style>
+  </defs>
+
+  <!-- Mark (scaled 1.4× from 64-unit base) -->
+  <g transform="translate(15 22) scale(1.4)">
+    <rect x="5" y="5" width="54" height="54" rx="12" fill="none" stroke="#E8920A" stroke-width="6"/>
+    <path d="M18 48 L32 16 L46 48 M24 37 H40" fill="none" stroke="#E8920A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="125" y="70" class="word">ATRIUM</text>
+
+  <!-- Subtitle -->
+  <text x="127" y="100" class="sub">THE ATRIUM MISSION</text>
+</svg>

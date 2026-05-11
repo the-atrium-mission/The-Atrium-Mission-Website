@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Atrium — Compact horizontal lockup
+  Mark + ATRIUM wordmark (no subtitle)
+  Colors: #E8920A
+  Type: Manrope 700 — install Manrope or convert text to outlines before final use.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 110" width="920" height="220">
+  <defs>
+    <style type="text/css"><![CDATA[
+      .word { font-family: 'Manrope','Helvetica Neue',Arial,sans-serif; font-weight: 700; font-size: 64px; letter-spacing: 8px; fill: #E8920A; }
+    ]]></style>
+  </defs>
+
+  <g transform="translate(15 14) scale(1.3)">
+    <rect x="5" y="5" width="54" height="54" rx="12" fill="none" stroke="#E8920A" stroke-width="6"/>
+    <path d="M18 48 L32 16 L46 48 M24 37 H40" fill="none" stroke="#E8920A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="115" y="72" class="word">ATRIUM</text>
+</svg>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Atrium — Mark only
+  Square ring + bold A letterform
+  Color: amber gold #E8920A on transparent
+  ViewBox: 64×64 — scales to any size
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="512" height="512">
+  <rect x="5" y="5" width="54" height="54" rx="12" fill="none" stroke="#E8920A" stroke-width="6"/>
+  <path d="M18 48 L32 16 L46 48 M24 37 H40" fill="none" stroke="#E8920A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

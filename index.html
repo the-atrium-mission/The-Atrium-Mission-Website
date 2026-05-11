@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07100d">
+<meta name="description" content="The Atrium Mission — social media owned by its users. No algorithms. No data brokering. End-to-end encryption. Community governance.">
+<title>The Atrium Mission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Manrope:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#E8920A; --gold-2:#ffae29; --gold-dim:#7A4A06; --gold-soft:rgba(232,146,10,.10);
+  --bg:#07100d; --bg-2:#0b1714; --ink:#ece6d8; --ink-2:#bdb4a3; --ink-dim:#8a8275;
+  --line:rgba(232,146,10,.18); --line-soft:rgba(232,146,10,.08);
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --nav-h:64px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden;max-width:100%;width:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.6;color:var(--ink);background:var(--bg);min-height:100vh;position:relative;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg{display:block;max-width:100%;height:auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none;cursor:pointer}
+::selection{background:var(--gold);color:#141414}
+
+#grain{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:1;opacity:.05;mix-blend-mode:overlay}
+.ambient-glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(120px);opacity:.28;will-change:transform}
+.ag-1{width:560px;height:560px;background:radial-gradient(circle,var(--gold) 0%,transparent 70%);top:-220px;left:-180px;animation:drift1 26s ease-in-out infinite alternate}
+.ag-2{width:680px;height:680px;background:radial-gradient(circle,#1d9e75 0%,transparent 70%);bottom:-260px;right:-220px;opacity:.15;animation:drift2 32s ease-in-out infinite alternate}
+.ag-3{width:420px;height:420px;background:radial-gradient(circle,var(--gold) 0%,transparent 70%);top:50%;right:-160px;opacity:.14;animation:drift1 38s ease-in-out infinite alternate-reverse}
+@keyframes drift1{from{transform:translate(0,0)}to{transform:translate(70px,50px)}}
+@keyframes drift2{from{transform:translate(0,0)}to{transform:translate(-60px,-40px)}}
+
+.hero-bg-logo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;opacity:.035}
+.hero-bg-logo svg{width:min(82vw,780px);height:auto}
+
+#topnav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 28px;background:rgba(7,16,13,.78);backdrop-filter:saturate(140%) blur(16px);-webkit-backdrop-filter:saturate(140%) blur(16px);border-bottom:1px solid var(--line-soft);z-index:50}
+.brand{display:flex;align-items:center;gap:11px;justify-self:start;cursor:pointer}
+.brand .mark{width:32px;height:32px;flex-shrink:0}
+.brand .wordmark{display:flex;flex-direction:column;line-height:1;gap:3px}
+.brand .word{font-family:var(--sans);font-weight:700;letter-spacing:.2em;font-size:13px;color:var(--gold)}
+.brand .sub{font-family:var(--sans);font-weight:500;letter-spacing:.22em;font-size:8.5px;color:var(--gold-dim);text-transform:uppercase}
+.nav-links{display:flex;gap:4px;justify-self:center}
+.nav-links a{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:6px;color:var(--ink-dim);transition:color .2s ease,background .2s ease}
+.nav-links a:hover,.nav-links a.is-active{color:var(--gold);background:var(--gold-soft)}
+.nav-cta{justify-self:end;display:flex;align-items:center;gap:14px}
+.nav-cta .ghost{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);padding:9px 16px;border:1px solid var(--line);border-radius:999px;transition:color .2s ease,border-color .2s ease,background .2s ease}
+.nav-cta .ghost:hover{color:var(--gold);border-color:var(--gold);background:var(--gold-soft)}
+
+.hamburger{display:none;width:36px;height:36px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:transparent;padding:0}
+.hamburger span{display:block;width:22px;height:1.6px;background:var(--gold);border-radius:2px;transition:transform .25s ease,opacity .25s ease}
+.hamburger.open span:nth-child(1){transform:translateY(6.6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.6px) rotate(-45deg)}
+
+#menu-overlay{position:fixed;inset:0;background:rgba(7,16,13,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:45;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+#menu-overlay.open{opacity:1;pointer-events:auto}
+#menu-overlay a{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--ink);letter-spacing:-.01em;padding:8px 16px;transition:color .2s ease}
+#menu-overlay a:hover,#menu-overlay a.is-active{color:var(--gold)}
+#menu-overlay .meta{margin-top:32px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--gold-dim);text-transform:uppercase}
+
+main{position:relative;z-index:2}
+.page{display:none}
+.page.active{display:block;animation:fadeIn .45s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+section{padding:120px 48px;max-width:100%;position:relative}
+.container{max-width:1180px;margin:0 auto;position:relative;z-index:2}
+.container--narrow{max-width:880px}
+
+.hero{min-height:92vh;padding-top:calc(var(--nav-h) + 60px);display:flex;align-items:center;position:relative;overflow:hidden}
+.hero .container{width:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:32px}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.eyebrow .sep{color:var(--gold-dim)}
+
+.h1{font-family:var(--serif);font-weight:300;font-size:clamp(48px,7.6vw,108px);line-height:.98;letter-spacing:-.025em;color:var(--ink);margin-bottom:32px;font-variation-settings:"opsz" 144}
+.h1 .word{display:inline-block;opacity:0;transform:translateY(28px);filter:blur(6px);animation:wordIn .85s cubic-bezier(.2,.7,.2,1) forwards}
+.h1 em{font-style:italic;color:var(--gold);font-weight:300}
+@keyframes wordIn{to{opacity:1;transform:translateY(0);filter:blur(0)}}
+
+.hero p.lede{font-size:clamp(17px,1.8vw,21px);line-height:1.55;max-width:660px;color:var(--ink-2);margin-bottom:44px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:16px 28px;border-radius:999px;border:1px solid var(--gold);transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease}
+.btn-primary{background:var(--gold);color:#141414;font-weight:600}
+.btn-primary:hover{transform:translateY(-2px);background:var(--gold-2)}
+.btn-ghost{color:var(--gold);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--gold);transform:translateY(-2px);background:var(--gold-soft)}
+.btn .arrow{transition:transform .2s ease}
+.btn:hover .arrow{transform:translateX(4px)}
+
+.hero-meta{margin-top:88px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:780px}
+.hero-meta .stat{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);border-top:1px solid var(--line-soft);padding-top:14px}
+.hero-meta .stat strong{display:block;font-family:var(--serif);font-size:28px;font-weight:400;letter-spacing:-.01em;color:var(--gold);margin-bottom:6px;text-transform:none}
+
+.section-head{margin-bottom:64px;max-width:780px}
+.section-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold)}
+.h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5vw,60px);line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin-bottom:24px}
+.h2 em{font-style:italic;color:var(--gold);font-weight:300}
+.section-head p{font-size:17px;line-height:1.65;color:var(--ink-2);max-width:660px}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+
+.card{background:linear-gradient(180deg,rgba(232,146,10,.04),rgba(232,146,10,0));border:1px solid var(--line-soft);border-radius:14px;padding:32px 28px;transition:border-color .25s ease,transform .25s ease,background .25s ease;position:relative;overflow:hidden}
+.card:hover{border-color:var(--line);transform:translateY(-3px);background:linear-gradient(180deg,rgba(232,146,10,.07),rgba(232,146,10,0))}
+.card .num{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--gold-dim);margin-bottom:18px}
+.card h3{font-family:var(--serif);font-weight:400;font-size:22px;letter-spacing:-.01em;color:var(--ink);margin-bottom:10px}
+.card p{font-size:15px;line-height:1.6;color:var(--ink-2)}
+
+/* principles grid - tighter, denser */
+.principles{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line-soft);border-left:1px solid var(--line-soft)}
+.principle{padding:30px 28px;border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);transition:background .25s ease}
+.principle:hover{background:rgba(232,146,10,.025)}
+.principle .num{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.principle .num::after{content:'';flex:1;height:1px;background:var(--line-soft)}
+.principle h4{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.01em;color:var(--ink);margin-bottom:8px}
+.principle p{color:var(--ink-2);font-size:14.5px;line-height:1.55}
+
+/* feed-card variant */
+.feed-card{padding:26px 22px}
+.feed-card .label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.feed-card h4{font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:8px;color:var(--ink);letter-spacing:-.01em}
+.feed-card p{font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+
+/* spec list */
+.spec-row{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line-soft);align-items:start}
+.spec-row:first-child{border-top:1px solid var(--line-soft)}
+.spec-row dt{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);padding-top:2px}
+.spec-row dd{color:var(--ink);font-size:15px;line-height:1.65}
+
+/* timeline */
+.timeline{display:flex;flex-direction:column;gap:0;border-left:1px solid var(--line);margin-left:12px}
+.timeline .step{position:relative;padding:22px 0 36px 36px}
+.timeline .step::before{content:'';position:absolute;left:-7px;top:30px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
+.timeline .step.now::before{background:var(--gold)}
+.timeline .step .phase-tag{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.timeline .step h3{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+.timeline .step p{color:var(--ink-2);font-size:15px;line-height:1.6;max-width:600px}
+.timeline .step.now h3{color:var(--gold)}
+
+/* signup blocks */
+.signup-block{border:1px solid var(--line);border-radius:16px;padding:36px;background:linear-gradient(180deg,rgba(232,146,10,.04),rgba(232,146,10,0));position:relative}
+.signup-block + .signup-block{margin-top:20px}
+.signup-block h3{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:-.01em;color:var(--ink);margin-bottom:8px}
+.signup-block .desc{color:var(--ink-2);font-size:15px;margin-bottom:22px;max-width:580px;line-height:1.6}
+.status-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dim);background:rgba(122,74,6,.16);border:1px solid var(--gold-dim);padding:6px 12px;border-radius:999px;margin-bottom:20px}
+form.offline{pointer-events:none;opacity:.35;user-select:none}
+form.offline input,form.offline button,form.offline textarea,form.offline select{font-family:var(--sans);font-size:15px;width:100%;padding:14px 16px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:8px;color:var(--ink);margin-bottom:12px}
+form.offline button[type="submit"]{background:var(--gold);color:#141414;border:0;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:16px;margin-top:6px;cursor:not-allowed}
+
+/* pull quote */
+.pull{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(22px,3vw,32px);line-height:1.35;letter-spacing:-.01em;color:var(--ink);border-left:2px solid var(--gold);padding:6px 0 6px 28px;margin:60px 0;max-width:840px}
+.pull cite{display:block;margin-top:14px;font-family:var(--mono);font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dim)}
+
+/* by-the-numbers */
+.numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.numbers .n{padding:36px 24px;border-right:1px solid var(--line-soft);text-align:left}
+.numbers .n:last-child{border-right:0}
+.numbers .n .big{font-family:var(--serif);font-size:clamp(40px,5vw,64px);font-weight:300;color:var(--gold);letter-spacing:-.02em;line-height:1;margin-bottom:14px;font-variation-settings:"opsz" 144}
+.numbers .n .lab{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* anti-addiction list */
+.antilist{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line-soft)}
+.antilist li{list-style:none;display:flex;gap:16px;align-items:flex-start;padding:22px 4px;border-bottom:1px solid var(--line-soft);font-size:15px;line-height:1.55;color:var(--ink-2)}
+.antilist li:nth-child(odd){padding-right:24px}
+.antilist li:nth-child(even){padding-left:24px;border-left:1px solid var(--line-soft)}
+.antilist li::before{content:attr(data-n);font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--gold);min-width:32px;padding-top:2px}
+.antilist li strong{color:var(--ink);font-weight:500;display:block;margin-bottom:4px;font-family:var(--sans)}
+
+/* CTA strip */
+.cta-strip{margin-top:80px;padding:56px 44px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(232,146,10,.06),rgba(232,146,10,0));display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.cta-strip h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3vw,36px);letter-spacing:-.015em;color:var(--ink);max-width:560px;line-height:1.15}
+
+/* footer */
+footer{position:relative;z-index:2;border-top:1px solid var(--line-soft);padding:60px 48px 36px;margin-top:80px}
+.footer-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px}
+.footer-brand{display:flex;flex-direction:column;gap:18px;max-width:340px}
+.footer-brand .logo-row{display:flex;align-items:center;gap:14px}
+.footer-brand .logo-row svg{width:46px;height:46px}
+.footer-brand .footer-wordmark{display:flex;flex-direction:column;gap:5px;line-height:1}
+.footer-brand .footer-wordmark .word{font-family:var(--sans);font-weight:700;font-size:22px;letter-spacing:.18em;color:var(--gold)}
+.footer-brand .footer-wordmark .sub{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.24em;color:var(--gold-dim);text-transform:uppercase}
+.footer-brand p{color:var(--ink-2);font-size:14px;line-height:1.6}
+.footer-col h5{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col li{font-size:13px;color:var(--ink-dim);display:flex;justify-content:space-between;gap:14px}
+.footer-col li span:last-child{color:var(--ink)}
+.footer-bottom{max-width:1180px;margin:0 auto;padding-top:24px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+.footer-bottom .phase{color:var(--gold)}
+
+/* reveals */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal[data-delay="1"]{transition-delay:.08s}
+.reveal[data-delay="2"]{transition-delay:.16s}
+.reveal[data-delay="3"]{transition-delay:.24s}
+.reveal[data-delay="4"]{transition-delay:.32s}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .h1 .word{opacity:1;transform:none;filter:none}
+  .reveal{opacity:1;transform:none}
+}
+
+@media (max-width:980px){
+  .grid-5{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .principles{grid-template-columns:1fr}
+  .principle{border-right:0}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-brand{grid-column:1/-1}
+  .numbers{grid-template-columns:repeat(2,1fr)}
+  .numbers .n:nth-child(2){border-right:0}
+  .numbers .n:nth-child(1),.numbers .n:nth-child(2){border-bottom:1px solid var(--line-soft)}
+  .antilist{grid-template-columns:1fr}
+  .antilist li{padding:22px 4px !important;border-left:0 !important}
+}
+@media (max-width:768px){
+  #topnav{padding:0 18px}
+  .nav-links,.nav-cta .ghost{display:none}
+  .hamburger{display:flex}
+  .nav-cta{justify-self:end}
+  section{padding:96px 32px}
+  .spec-row{grid-template-columns:1fr;gap:6px}
+  .spec-row dt{padding-top:0}
+  footer{padding:48px 32px 32px}
+  .cta-strip{padding:36px 28px}
+}
+@media (max-width:600px){
+  section{padding:56px 20px}
+  .grid-5,.grid-3,.grid-2{grid-template-columns:1fr;gap:14px}
+  .footer-inner{grid-template-columns:1fr;gap:28px}
+  .h1{font-size:clamp(44px,13vw,72px)}
+  .hero{padding-top:calc(var(--nav-h) + 32px);min-height:auto;padding-bottom:48px}
+  .hero-meta{grid-template-columns:repeat(2,1fr);gap:18px;margin-top:48px}
+  .cta-row{flex-direction:column;width:100%}
+  .cta-row .btn{width:100%}
+  .signup-block{padding:24px 20px}
+  .pull{margin:32px 0;padding-left:18px;font-size:20px}
+  .timeline .step{padding:18px 0 28px 28px}
+  footer{padding:40px 20px 28px}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:10px}
+  .numbers{grid-template-columns:1fr}
+  .numbers .n{border-right:0;border-bottom:1px solid var(--line-soft);padding:28px 4px}
+  .numbers .n:last-child{border-bottom:0}
+  .cta-strip{flex-direction:column;align-items:flex-start;text-align:left;padding:28px 22px}
+  .cta-strip h3{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="grain" aria-hidden="true"></canvas>
+<div class="ambient-glow ag-1" aria-hidden="true"></div>
+<div class="ambient-glow ag-2" aria-hidden="true"></div>
+<div class="ambient-glow ag-3" aria-hidden="true"></div>
+
+<!-- Reusable inline logo as <symbol> for footer / hero bg -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="atriumMark" viewBox="0 0 64 64">
+      <rect x="5" y="5" width="54" height="54" rx="12" fill="none" stroke="currentColor" stroke-width="6"/>
+      <path d="M18 48 L32 16 L46 48 M24 37 H40" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav id="topnav" aria-label="Primary">
+  <div class="brand" onclick="showPage('home')" role="button" tabindex="0" aria-label="Atrium home">
+    <svg class="mark" viewBox="0 0 64 64" style="color:var(--gold)" aria-hidden="true"><use href="#atriumMark"/></svg>
+    <div class="wordmark">
+      <span class="word">ATRIUM</span>
+      <span class="sub">The Atrium Mission</span>
+    </div>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a data-page="home" onclick="showPage('home')">Home</a>
+    <a data-page="sentinel" onclick="showPage('sentinel')">Sentinel</a>
+    <a data-page="mycelium" onclick="showPage('mycelium')">Mycelium</a>
+    <a data-page="phases" onclick="showPage('phases')">Phases</a>
+    <a data-page="join" onclick="showPage('join')">Join</a>
+  </div>
+  <div class="nav-cta">
+    <a class="ghost" onclick="showPage('join')">Founding Circle</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="menu-overlay" role="dialog" aria-label="Menu" aria-hidden="true">
+  <a data-page="home" onclick="showPage('home')">Home</a>
+  <a data-page="sentinel" onclick="showPage('sentinel')">Sentinel</a>
+  <a data-page="mycelium" onclick="showPage('mycelium')">Mycelium</a>
+  <a data-page="phases" onclick="showPage('phases')">Phases</a>
+  <a data-page="join" onclick="showPage('join')">Join</a>
+  <div class="meta">Phase 0 — Founding Circle Open</div>
+</div>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<section id="home" class="page active">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-bg-logo" aria-hidden="true">
+      <svg viewBox="0 0 64 64" style="color:var(--gold)"><use href="#atriumMark"/></svg>
+    </div>
+    <div class="container">
+      <div class="eyebrow"><span>The Atrium Mission</span><span class="sep">·</span><span>Phase 0 — Founding Circle</span></div>
+      <h1 class="h1">A public square <em>built for</em> the people who use it.</h1>
+      <p class="lede">Social media owned by its users. No algorithmic manipulation. No data brokering. End-to-end encryption where it matters. Community-governed rules. Open source &amp; auditable. Resistant by architecture, not by promise.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" onclick="showPage('join')">Join the Founding Circle <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" onclick="goHomeAndScroll('principles')">Read the principles</a>
+      </div>
+      <div class="hero-meta">
+        <div class="stat reveal"><strong>0</strong>data sold</div>
+        <div class="stat reveal" data-delay="1"><strong>E2EE</strong>by default</div>
+        <div class="stat reveal" data-delay="2"><strong>Co-op</strong>future structure</div>
+        <div class="stat reveal" data-delay="3"><strong>Open</strong>source</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Principles -->
+  <section id="principles">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Core Non-Negotiables</div>
+        <h2 class="h2">Ten principles. <em>None of them optional.</em></h2>
+        <p>These are written into the founding charter — legally embedded so they survive future leadership, acquisition, or pressure. If we ever break one, we have to amend the charter publicly, and the community has to vote on it.</p>
+      </div>
+
+      <div class="principles">
+        <div class="principle reveal">
+          <div class="num"><span>01</span></div>
+          <h4>No algorithmic manipulation</h4>
+          <p>Chronological or fully user-defined feeds. No black-box ranking. Ever.</p>
+        </div>
+        <div class="principle reveal" data-delay="1">
+          <div class="num"><span>02</span></div>
+          <h4>End-to-end encryption</h4>
+          <p>We never see your keys. They live on your device. If you opt into encrypted cloud backup, they're encrypted with a passphrase only you hold — still mathematically inaccessible to us.</p>
+        </div>
+        <div class="principle reveal">
+          <div class="num"><span>03</span></div>
+          <h4>Open moderation</h4>
+          <p>Community-driven juries. Every action logged, reasoned, and publicly appealable.</p>
+        </div>
+        <div class="principle reveal" data-delay="1">
+          <div class="num"><span>04</span></div>
+          <h4>Anti-addiction by design</h4>
+          <p>No infinite scroll. No engagement bait. Notifications off by default. 30-min break prompts.</p>
+        </div>
+        <div class="principle reveal">
+          <div class="num"><span>05</span></div>
+          <h4>Open source</h4>
+          <p>Fully auditable codebase. Trust through math, not marketing.</p>
+        </div>
+        <div class="principle reveal" data-delay="1">
+          <div class="num"><span>06</span></div>
+          <h4>No data brokering</h4>
+          <p>Zero user data sold or shared with third parties. Legally binding in our charter.</p>
+        </div>
+        <div class="principle reveal">
+          <div class="num"><span>07</span></div>
+          <h4>Government independence</h4>
+          <p>Architecture limits what can be produced under legal compulsion. The math does the protecting.</p>
+        </div>
+        <div class="principle reveal" data-delay="1">
+          <div class="num"><span>08</span></div>
+          <h4>Full opt-in</h4>
+          <p>Only the data required for the app to function is collected by default. Everything else is opt-in.</p>
+        </div>
+        <div class="principle reveal">
+          <div class="num"><span>09</span></div>
+          <h4>Freedom of expression</h4>
+          <p>NSFW and Sensitive flags replace suppression. Content is labeled, not removed.</p>
+        </div>
+        <div class="principle reveal" data-delay="1">
+          <div class="num"><span>10</span></div>
+          <h4>No shadowbanning</h4>
+          <p>Every action communicated to the user with a written reason. If we can't justify it publicly, we don't do it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Opt-in by default -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Opt-in, never opt-out</div>
+        <h2 class="h2">Your account does <em>nothing</em> until you tell it to.</h2>
+        <p>When you sign up, you get an account — and that's it. Atrium and Sentinel are both off until you choose to activate them. No surprise feeds. No surprise messaging inbox. No "you forgot to disable this." Activate one, both, or neither. Change your mind any time.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="num">01 — SIGN UP</div>
+          <h3>Four questions, that's it</h3>
+          <p>Email. Username. Are you 13+? How should Sentinel store your keys? You're done. Nothing else is collected, nothing else is on.</p>
+        </div>
+        <div class="card reveal" data-delay="1">
+          <div class="num">02 — ACTIVATE WHAT YOU WANT</div>
+          <h3>Atrium, Sentinel, or both</h3>
+          <p>Want the social platform? Opt in to Atrium. Want encrypted messaging? Opt in to Sentinel. Want both? Opt in to both. Each is independent.</p>
+        </div>
+        <div class="card reveal" data-delay="2">
+          <div class="num">03 — TRY TO USE IT BEFORE OPTING IN</div>
+          <h3>We tell you, plainly</h3>
+          <p>If you visit a service you haven't activated, we show a short notice pointing you to the opt-in flow. No silent rerouting. No dark patterns. Account settings work either way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three pillars -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">What we're building</div>
+        <h2 class="h2">A platform, an infrastructure, <em>and a guardian.</em></h2>
+        <p>Three products under one mission. Each independently auditable. Each designed to be useless to anyone who would corrupt it.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="num">01 — ATRIUM</div>
+          <h3>The public square</h3>
+          <p>Five feeds, community-governed rules, no shadowbans, full data portability. Web first, then mobile. Co-op governance phased in as the founding base grows.</p>
+        </div>
+        <div class="card reveal" data-delay="1">
+          <div class="num">02 — MYCELIUM</div>
+          <h3>The community network</h3>
+          <p>Distributed media hosting on volunteer nodes. Cryptographic hashes pinned to a signed ledger. Files sharded across hosts so no single one holds a complete copy.</p>
+        </div>
+        <div class="card reveal" data-delay="2">
+          <div class="num">03 — SENTINEL</div>
+          <h3>The guardian</h3>
+          <p>Signal-protocol messaging. Keys generated on your device — we never see them, even with opt-in encrypted cloud backup. Under subpoena, we can produce only encrypted noise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Five feeds -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">The Atrium Platform</div>
+        <h2 class="h2">Five tabs. <em>One principle:</em> you stay in control.</h2>
+        <p>Every feed is chronological by default. If you want personalization on For You, opt in — the model runs entirely on your device, never on our servers. Trending uses a four-signal fraud-resistant model that's never raw popularity. News &amp; Media enforces multi-source corroboration and geographic diversity. Sentinel has no feed at all.</p>
+      </div>
+      <div class="grid-5">
+        <div class="card feed-card reveal">
+          <div class="label">For You</div>
+          <h4>Your choice</h4>
+          <p>Chronological by default. Opt-in personalization runs locally on your device — never on our servers.</p>
+        </div>
+        <div class="card feed-card reveal" data-delay="1">
+          <div class="label">Trending</div>
+          <h4>Volume + velocity</h4>
+          <p>Diversity-weighted. Coordinated-posting flagged. Discovery slot reserved.</p>
+        </div>
+        <div class="card feed-card reveal" data-delay="2">
+          <div class="label">News &amp; Media</div>
+          <h4>Verified sources</h4>
+          <p>Multi-source corroboration. Geographic quotas. Fact-check flags visible.</p>
+        </div>
+        <div class="card feed-card reveal" data-delay="3">
+          <div class="label">Community</div>
+          <h4>Self-governed</h4>
+          <p>Jury voting. Rule proposals. Transparent moderation logs.</p>
+        </div>
+        <div class="card feed-card reveal" data-delay="4">
+          <div class="label">Sentinel</div>
+          <h4>Pure E2EE</h4>
+          <p>No algorithm. No server-side decryption. Ever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy by Design -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Privacy by design</div>
+        <h2 class="h2">We collect <em>almost nothing.</em></h2>
+        <p>The only mandatory field at signup is an email address — and that's only for account recovery. No phone number, no real name, no date of birth. Age verification is a single yes/no check. Your contact list, if you keep one, is encrypted with your public key on our servers — we can't read it either.</p>
+      </div>
+
+      <dl>
+        <div class="spec-row reveal"><dt>Email</dt><dd>Required — the only mandatory field. Used for account recovery and critical notices.</dd></div>
+        <div class="spec-row reveal"><dt>Phone</dt><dd>Optional. Never required. Used for 2FA only if you choose to enable it.</dd></div>
+        <div class="spec-row reveal"><dt>Real name</dt><dd>Never collected. Use any handle you want.</dd></div>
+        <div class="spec-row reveal"><dt>Date of birth</dt><dd>Never collected. The age gate is a single 13+ yes/no at signup, self-declared.</dd></div>
+        <div class="spec-row reveal"><dt>Private key</dt><dd>Generated on your device. We never see it. If you opt into encrypted cloud backup, it's encrypted with a passphrase only you hold — still mathematically inaccessible to anyone but you.</dd></div>
+        <div class="spec-row reveal"><dt>Contact list</dt><dd>Encrypted with your public key on the server. Only your private key can read it.</dd></div>
+        <div class="spec-row reveal"><dt>Data sold</dt><dd>Zero. The charter legally prohibits any sale or sharing of user data.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Anti-addiction -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Anti-addiction by design</div>
+        <h2 class="h2">Designed to <em>respect your time</em>, not extract it.</h2>
+        <p>Every mechanic that hooks you to a conventional feed — infinite scroll, autoplay, push notifications, engagement-bait ranking — is structurally absent. Not a setting you have to find. Absent.</p>
+      </div>
+
+      <ul class="antilist">
+        <li data-n="01"><div><strong>Chronological feeds</strong>No algorithm pushing content engineered to maximize session time.</div></li>
+        <li data-n="02"><div><strong>No infinite scroll</strong>Feeds have a natural endpoint. We don't extend the rope.</div></li>
+        <li data-n="03"><div><strong>No autoplay</strong>Video does not roll into the next video. You decide what plays.</div></li>
+        <li data-n="04"><div><strong>No engagement bait</strong>No algorithmic promotion of rage, outrage, or controversy.</div></li>
+        <li data-n="05"><div><strong>Notifications off by default</strong>You enable specifically what you want — nothing pre-checked.</div></li>
+        <li data-n="06"><div><strong>30-minute scroll prompt</strong>A gentle nudge after long sessions. Adjustable, dismissible, or off entirely.</div></li>
+      </ul>
+
+      <blockquote class="pull reveal">
+        We protect our team's personal privacy for the same reason we protect yours — because privacy is a right, not a privilege. Judge us by what we do, not by who we are.
+        <cite>— Founding Charter</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- By the numbers -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">By the numbers</div>
+        <h2 class="h2">The shape of the commitment.</h2>
+      </div>
+      <div class="numbers reveal">
+        <div class="n"><div class="big">0</div><div class="lab">User data sold or shared</div></div>
+        <div class="n"><div class="big">1</div><div class="lab">Mandatory signup field — email</div></div>
+        <div class="n"><div class="big">5</div><div class="lab">Independent feed tabs</div></div>
+        <div class="n"><div class="big">90<span style="font-size:.55em;color:var(--ink-dim)">days</span></div><div class="lab">Data export window if we shut down</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA strip -->
+  <section style="padding-top:0">
+    <div class="container">
+      <div class="cta-strip reveal">
+        <h3>Help shape the platform before it ships. Phase 0 is open.</h3>
+        <a class="btn btn-primary" onclick="showPage('join')">Join the Founding Circle <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ SENTINEL ============ -->
+<section id="sentinel" class="page">
+
+  <div class="hero">
+    <div class="container">
+      <div class="eyebrow"><span>Sentinel</span><span class="sep">·</span><span>Encrypted Messaging</span></div>
+      <h1 class="h1">Keys you hold. <em>Messages we can't read.</em></h1>
+      <p class="lede">Sentinel uses the Signal Protocol. Private keys are generated on your device, and we never see them. If you opt into encrypted cloud backup, they remain mathematically inaccessible to us — encrypted with a passphrase only you hold. Under subpoena, the only thing we can hand over is unreadable encrypted noise.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" onclick="showPage('join')">Get notified at launch <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" onclick="showPage('mycelium')">See Mycelium</a>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Why centralized — and not federated</div>
+        <h2 class="h2">Federation introduces <em>trust variables</em> we won't take on.</h2>
+        <p>A bad-actor node in a federated network can intercept metadata even without reading message content. Sentinel runs on a centralized, transparent infrastructure with zero ability to read your keys — independently audited, with a public warrant canary maintained on a fixed schedule.</p>
+      </div>
+
+      <dl>
+        <div class="spec-row reveal"><dt>Protocol</dt><dd>Signal Protocol. Open source, peer-reviewed, battle-tested. We don't roll our own crypto.</dd></div>
+        <div class="spec-row reveal"><dt>Private keys</dt><dd>Generated on your device. We never see them. With opt-in encrypted cloud backup, they're encrypted with a passphrase only you hold — still mathematically inaccessible to anyone but you.</dd></div>
+        <div class="spec-row reveal"><dt>Public keys</dt><dd>Stored on the server so others can encrypt to you. The only thing we keep.</dd></div>
+        <div class="spec-row reveal"><dt>Encryption at rest</dt><dd>All messages encrypted on every device. The platform sees encrypted blobs only.</dd></div>
+        <div class="spec-row reveal"><dt>Cross-device sync</dt><dd>Direct device-to-device handshake via QR or pairing code. Beta feature. The server only routes encrypted envelopes it cannot open.</dd></div>
+        <div class="spec-row reveal"><dt>Audits</dt><dd>Third-party security audits published in full. Warrant canary maintained on a fixed cadence.</dd></div>
+        <div class="spec-row reveal"><dt>Group chats</dt><dd>Available in Beta. Voice and video calls land Post-Beta.</dd></div>
+      </dl>
+
+      <h3 style="font-family:var(--serif);font-weight:400;font-size:32px;letter-spacing:-.015em;color:var(--ink);margin:80px 0 32px">Storage tiers <em style="color:var(--gold);font-style:italic;font-weight:300">— you choose at first launch.</em></h3>
+
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="num">TIER 01 — LOCAL ONLY</div>
+          <h3>Single device</h3>
+          <p>Messages live encrypted on your device. No cross-device. Zero platform access.</p>
+        </div>
+        <div class="card reveal" data-delay="1">
+          <div class="num">TIER 02 — LOCAL + CLOUD</div>
+          <h3>Encrypted backup</h3>
+          <p>Cross-device works. We store an encrypted blob we cannot read.</p>
+        </div>
+        <div class="card reveal" data-delay="2">
+          <div class="num">TIER 03 — CLOUD</div>
+          <h3>Full sync</h3>
+          <p>Web + all devices. Encrypted blob only. Same zero-access guarantee.</p>
+        </div>
+      </div>
+
+      <blockquote class="pull reveal">
+        We will never see your keypair. We will never possess a readable copy of it. We will never want to. It is yours — kept on your device, or encrypted in storage only you can unlock.
+        <cite>— ToS Commitment</cite>
+      </blockquote>
+
+      <div class="cta-strip reveal">
+        <h3>Sentinel ships with the Open Beta. Founding Circle members get early access.</h3>
+        <a class="btn btn-primary" onclick="showPage('join')">Apply <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ MYCELIUM ============ -->
+<section id="mycelium" class="page">
+
+  <div class="hero">
+    <div class="container">
+      <div class="eyebrow"><span>Mycelium</span><span class="sep">·</span><span>Community Hosting</span></div>
+      <h1 class="h1">Infrastructure that <em>belongs to everyone.</em></h1>
+      <p class="lede">Mycelium is the storage layer for public media on Atrium — hosted by volunteer operators on Linux and Windows. Files are sharded across hosts and hash-verified at every delivery, so no single host can read, alter, or steal what they're holding.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" onclick="showPage('join')">Register as a host <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" onclick="showPage('sentinel')">See Sentinel</a>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Tamper-proof by design</div>
+        <h2 class="h2">Mathematically <em>useless</em> to a bad-actor host.</h2>
+        <p>The cryptographic ledger is the source of truth. Hosts serve content but cannot meaningfully modify it. Files arrive sharded — a single host never sees a complete usable copy of anything.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="num">01 — HASH</div>
+          <h3>Pinned at upload</h3>
+          <p>Every file gets a cryptographic fingerprint stored on a signed central ledger. Hosts cannot rewrite the ledger.</p>
+        </div>
+        <div class="card reveal" data-delay="1">
+          <div class="num">02 — SHARD</div>
+          <h3>No complete copies</h3>
+          <p>Files are split across multiple hosts. No single operator holds enough to reassemble the original.</p>
+        </div>
+        <div class="card reveal" data-delay="2">
+          <div class="num">03 — VERIFY</div>
+          <h3>Checked at delivery</h3>
+          <p>Every fetch is hash-verified before playback. Altered files are auto-rejected at the client edge.</p>
+        </div>
+      </div>
+
+      <dl style="margin-top:64px">
+        <div class="spec-row reveal"><dt>Supported OS</dt><dd>Linux (all major distros) and Windows desktop / server. Targeting the homelab and self-hosting community first.</dd></div>
+        <div class="spec-row reveal"><dt>Host accountability</dt><dd>Verified registration. Signed legal hosting agreement with tampering liability clauses on record.</dd></div>
+        <div class="spec-row reveal"><dt>Compensation</dt><dd>Non-monetary at this stage: profile badge, host title, early-access perks, public recognition. Co-op revenue share is on the longer roadmap.</dd></div>
+        <div class="spec-row reveal"><dt>Onboarding</dt><dd>Full tutorial video and documentation drop with the Mycelium alpha. Hosts onboard before users depend on them.</dd></div>
+        <div class="spec-row reveal"><dt>Content liability</dt><dd>Hosts are insulated by the sharding model — you do not hold complete files and you cannot read what you store.</dd></div>
+      </dl>
+
+      <blockquote class="pull reveal">
+        Don't trust us. Verify us.
+        <cite>— Atrium principle #6</cite>
+      </blockquote>
+
+      <div class="cta-strip reveal">
+        <h3>Mycelium alpha opens with Phase 1. Register interest now and we'll reach out.</h3>
+        <a class="btn btn-primary" onclick="showPage('join')">Register as a host <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ PHASES ============ -->
+<section id="phases" class="page">
+
+  <div class="hero">
+    <div class="container">
+      <div class="eyebrow"><span>Roadmap</span><span class="sep">·</span><span>Honest about where we are</span></div>
+      <h1 class="h1">Phase 0. <em>We're early on purpose.</em></h1>
+      <p class="lede">We'd rather build slowly with the people who care than launch loudly to the people who don't. Here's what's done, what's next, and what we're not promising yet.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">The Phases</div>
+        <h2 class="h2">Five phases. <em>One commitment</em> per phase.</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="step now reveal">
+          <div class="phase-tag">Phase 0 — Now</div>
+          <h3>Founding Circle &amp; infrastructure design</h3>
+          <p>50–200 people from the originating community shape the platform. Infrastructure design begins. Outreach quietly opens. This is the only phase where the people involved can fundamentally change what the platform becomes.</p>
+        </div>
+        <div class="step reveal" data-delay="1">
+          <div class="phase-tag">Phase 1 — Next</div>
+          <h3>Mycelium host recruitment &amp; alpha</h3>
+          <p>Recruit and onboard the first wave of host operators. Stress-test the infrastructure before users depend on it.</p>
+        </div>
+        <div class="step reveal" data-delay="2">
+          <div class="phase-tag">Phase 2</div>
+          <h3>Open Beta — web app</h3>
+          <p>Public web launch. Five feeds, posting, open moderation dashboard, Sentinel one-to-one messaging. Radical transparency about what is and isn't yet built.</p>
+        </div>
+        <div class="step reveal" data-delay="3">
+          <div class="phase-tag">Phase 3</div>
+          <h3>Mobile + group chats</h3>
+          <p>iOS and Android launch. Sentinel group chats. Cross-device key sync via P2P pairing. Developer API.</p>
+        </div>
+        <div class="step reveal" data-delay="4">
+          <div class="phase-tag">Post-Beta</div>
+          <h3>Voice, video &amp; co-op transition</h3>
+          <p>Sentinel voice and video. Full public API. Creator tools. Legal restructure into a full platform co-operative — users become partial owners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:40px">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">What we're NOT promising yet</div>
+        <h2 class="h2">The list of things <em>we won't claim</em> until we've shipped them.</h2>
+        <p>Honesty about scope is part of the trust. Here's what's intentionally outside Phase 0 and Phase 1:</p>
+      </div>
+      <div class="grid-3">
+        <div class="card reveal"><div class="num">DEFERRED</div><h3>Voice &amp; video</h3><p>Sentinel voice and video calls. Post-Beta only.</p></div>
+        <div class="card reveal" data-delay="1"><div class="num">DEFERRED</div><h3>Creator tools &amp; articles</h3><p>Long-form, monetization-adjacent features. After core platform stabilises.</p></div>
+        <div class="card reveal" data-delay="2"><div class="num">DEFERRED</div><h3>Full public API</h3><p>Limited Developer API in Beta. Full API later, once governance is clear.</p></div>
+      </div>
+
+      <blockquote class="pull reveal">
+        We'd rather under-promise and ship than build a backlog of marketing claims we can't keep.
+        <cite>— Internal Build Note</cite>
+      </blockquote>
+    </div>
+  </section>
+</section>
+
+<!-- ============ JOIN ============ -->
+<section id="join" class="page">
+
+  <div class="hero">
+    <div class="container">
+      <div class="eyebrow"><span>Join</span><span class="sep">·</span><span>Founding Circle &amp; Hosts</span></div>
+      <h1 class="h1">Help us <em>build this</em> in the open.</h1>
+      <p class="lede">Two ways to get involved during Phase 0: apply to the Founding Circle to help shape the platform's earliest decisions, or register interest in running a Mycelium host node when alpha opens.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Why Phase 0 matters</div>
+        <h2 class="h2">A small group, <em>real influence.</em></h2>
+        <p>Founding Circle members aren't beta testers — they're co-authors of the rule system that ships with Open Beta. Vote on early proposals. Stress-test moderation policy. Help define what "community-governed" actually means in practice.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="num">01</div>
+          <h3>Shape the rules</h3>
+          <p>Vote on the first set of platform rules before they ship to the public.</p>
+        </div>
+        <div class="card reveal" data-delay="1">
+          <div class="num">02</div>
+          <h3>Test the architecture</h3>
+          <p>Early access to alpha builds. Direct line to the team for feedback.</p>
+        </div>
+        <div class="card reveal" data-delay="2">
+          <div class="num">03</div>
+          <h3>Be on the record</h3>
+          <p>Founding Circle members are credited in the platform's public history. Permanent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:40px">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Sign-ups</div>
+        <h2 class="h2"><em>Coming soon.</em> Forms below are placeholders.</h2>
+        <p>We're not collecting any data yet. The forms below are visual placeholders — disabled on purpose until our infrastructure and email handling are properly verified. Watch this space.</p>
+      </div>
+
+      <div class="signup-block reveal">
+        <span class="status-badge">Signup offline — coming soon</span>
+        <h3>Founding Circle</h3>
+        <p class="desc">50–200 people who help define the platform's earliest rules and feature priorities. Pulled from the originating community first, then opening more broadly.</p>
+        <form class="offline" aria-disabled="true" onsubmit="return false">
+          <input type="text" placeholder="Handle or first name" tabindex="-1">
+          <input type="email" placeholder="Proton or other private email" tabindex="-1">
+          <textarea rows="3" placeholder="Why do you want to be in the Founding Circle?" tabindex="-1"></textarea>
+          <button type="submit" tabindex="-1">Apply — disabled</button>
+        </form>
+      </div>
+
+      <div class="signup-block reveal" data-delay="1">
+        <span class="status-badge">Signup offline — coming soon</span>
+        <h3>Mycelium Host Interest</h3>
+        <p class="desc">Want to help host the network? Register interest now and we'll reach out when alpha onboarding opens. Linux and Windows both supported.</p>
+        <form class="offline" aria-disabled="true" onsubmit="return false">
+          <input type="text" placeholder="Handle or first name" tabindex="-1">
+          <input type="email" placeholder="Contact email" tabindex="-1">
+          <select tabindex="-1">
+            <option>Operating system — Linux</option>
+            <option>Operating system — Windows</option>
+            <option>Operating system — Other</option>
+          </select>
+          <textarea rows="2" placeholder="Brief: bandwidth, storage available, prior self-hosting experience" tabindex="-1"></textarea>
+          <button type="submit" tabindex="-1">Register interest — disabled</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <svg viewBox="0 0 64 64" style="color:var(--gold)" aria-hidden="true"><use href="#atriumMark"/></svg>
+        <div class="footer-wordmark">
+          <span class="word">ATRIUM</span>
+          <span class="sub">The Atrium Mission</span>
+        </div>
+      </div>
+      <p>The Atrium Mission is building social media owned by its users. Open source, community-governed, audited, and resistant by architecture.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Platform</h5>
+      <ul>
+        <li><span>Feeds</span><span>Five tabs</span></li>
+        <li><span>Algorithm</span><span>Chronological</span></li>
+        <li><span>Ads</span><span>Opt-in only</span></li>
+        <li><span>Data sold</span><span>Never</span></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Privacy</h5>
+      <ul>
+        <li><span>Encryption</span><span>E2EE</span></li>
+        <li><span>Keys</span><span>Yours alone</span></li>
+        <li><span>Audits</span><span>Public</span></li>
+        <li><span>Source</span><span>Open</span></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Status</h5>
+      <ul>
+        <li><span>Phase</span><span>0</span></li>
+        <li><span>Status</span><span>Infrastructure Development</span></li>
+        <li><span>App</span><span>Pre-alpha</span></li>
+        <li><span>Founding Circle</span><span>Open</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>The Atrium Mission · v2.1</span>
+    <span class="phase">Phase 0 — Founding Circle open</span>
+  </div>
+</footer>
+
+<script>
+function showPage(pageId){
+  var pages=document.querySelectorAll('.page');
+  for(var i=0;i<pages.length;i++) pages[i].classList.remove('active');
+  var target=document.getElementById(pageId);
+  if(target) target.classList.add('active');
+  var links=document.querySelectorAll('[data-page]');
+  for(var j=0;j<links.length;j++){
+    if(links[j].getAttribute('data-page')===pageId) links[j].classList.add('is-active');
+    else links[j].classList.remove('is-active');
+  }
+  var overlay=document.getElementById('menu-overlay');
+  if(overlay && overlay.classList.contains('open')) toggleMenu();
+  window.scrollTo({top:0,behavior:'auto'});
+  if(window.__atriumRevealRefresh) window.__atriumRevealRefresh();
+}
+function goHomeAndScroll(anchorId){
+  showPage('home');
+  setTimeout(function(){
+    var el=document.getElementById(anchorId);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  },80);
+}
+function toggleMenu(){
+  var overlay=document.getElementById('menu-overlay');
+  var btn=document.getElementById('hamburgerBtn');
+  if(!overlay||!btn) return;
+  var isOpen=overlay.classList.toggle('open');
+  btn.classList.toggle('open',isOpen);
+  btn.setAttribute('aria-expanded',isOpen?'true':'false');
+  overlay.setAttribute('aria-hidden',isOpen?'false':'true');
+  document.body.style.overflow=isOpen?'hidden':'';
+}
+document.addEventListener('DOMContentLoaded',function(){
+  // canvas grain
+  (function(){
+    var c=document.getElementById('grain');
+    if(!c||!c.getContext) return;
+    var ctx=c.getContext('2d');
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    function paint(){
+      var w=Math.floor(window.innerWidth);
+      var h=Math.floor(window.innerHeight);
+      c.width=w*dpr; c.height=h*dpr;
+      c.style.width=w+'px'; c.style.height=h+'px';
+      var img=ctx.createImageData(c.width,c.height);
+      var d=img.data;
+      for(var i=0;i<d.length;i+=4){
+        var v=Math.random()*255|0;
+        d[i]=v; d[i+1]=v; d[i+2]=v; d[i+3]=Math.random()<.5?22:0;
+      }
+      ctx.putImageData(img,0,0);
+    }
+    paint();
+    var t;
+    window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(paint,180);},{passive:true});
+  })();
+  // word-by-word hero h1
+  (function(){
+    document.querySelectorAll('.h1').forEach(function(el){
+      if(el.dataset.split==='1') return;
+      el.dataset.split='1';
+      var tmp=document.createElement('div');
+      tmp.innerHTML=el.innerHTML;
+      var nodes=Array.from(tmp.childNodes);
+      el.innerHTML='';
+      var idx=0;
+      nodes.forEach(function(n){
+        if(n.nodeType===3){
+          n.textContent.split(/(\s+)/).forEach(function(part){
+            if(!part) return;
+            if(/^\s+$/.test(part)){el.appendChild(document.createTextNode(part));return;}
+            var s=document.createElement('span');
+            s.className='word';
+            s.style.animationDelay=(idx*0.06)+'s';
+            s.textContent=part;
+            el.appendChild(s);
+            idx++;
+          });
+        } else {
+          var s=document.createElement('span');
+          s.className='word';
+          s.style.animationDelay=(idx*0.06)+'s';
+          s.appendChild(n);
+          el.appendChild(s);
+          idx++;
+        }
+      });
+    });
+  })();
+  // intersection reveals
+  (function(){
+    if(!('IntersectionObserver' in window)){
+      document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')});
+      return;
+    }
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    function observeAll(){
+      document.querySelectorAll('.reveal:not(.in)').forEach(function(el){
+        var page=el.closest('.page');
+        if(!page || page.classList.contains('active')) io.observe(el);
+      });
+    }
+    observeAll();
+    window.__atriumRevealRefresh=observeAll;
+  })();
+  // mark active nav
+  (function(){
+    var active=document.querySelector('.page.active');
+    if(active && active.id){
+      document.querySelectorAll('[data-page]').forEach(function(a){
+        if(a.getAttribute('data-page')===active.id) a.classList.add('is-active');
+      });
+    }
+  })();
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      var overlay=document.getElementById('menu-overlay');
+      if(overlay && overlay.classList.contains('open')) toggleMenu();
+    }
+  });
+});
+</script>
+</body>
+</html>
